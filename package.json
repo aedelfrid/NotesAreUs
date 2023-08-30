@@ -1,19 +1,14 @@
 {
-  "name": "notesareus",
+  "name": "note-taker",
   "version": "1.0.0",
-  "description": "a site that allows users to take and store notes remotely",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aedelfrid/NotesAreUs.git"
-  },
-  "author": "aedelfrid",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/aedelfrid/NotesAreUs/issues"
-  },
-  "homepage": "https://github.com/aedelfrid/NotesAreUs#readme"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }

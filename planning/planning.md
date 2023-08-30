@@ -42,9 +42,23 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ## Plan code/ pseudocode
 
-### Routes
+#### front end
 
-### DB
+connect "index.html = '/'",
+"notes.html = '/notes'",
 
-### Logic
+#### back end
 
+##### api routes
+
+##### db routes
+
+#### DB
+
+db.json
+
+##### FS
+
+##### routing
+
+### Readme
