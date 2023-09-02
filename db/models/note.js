@@ -1,0 +1,1 @@
+// create a class for a note
