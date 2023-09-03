@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { readNote, readAllNotes, appendNote, deleteNote, updateNote } = require('../../utilities/FS')
 // note model import
 
 // grab all notes
