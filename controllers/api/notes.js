@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const { readNote, readAllNotes, appendNote, deleteNote, updateNote } = require('../../utilities/FS')
-// note model import
-
+const noteObj = require('../../db/models/note')
+const PATH = 'db/db.json'
 // grab all notes
 router.get('/', async (req, res) => {
     try {
-        //fs read from db.json
+        const notes = await readAllNotes(PATH);
+        res.json(notes)
     } catch (err) {
         console.log(err)
         return res.status(500).json(err)
@@ -13,19 +14,24 @@ router.get('/', async (req, res) => {
 })
 
 // grab a specific note
-router.get('/*', async (req, res) => {
+router.get('/:i', async (req, res) => {
     try {
-        //fs read from db.json
+        const note = await readNote(PATH, req.params.i);
+        res.json(note)
     } catch (err) {
         console.log(err)
         return res.status(500).json(err)
     }
 })
 
-// wtites a new note
+// writes a new note
 router.post('/', async (req, res) => {
     try {
-        //fs writeToFile
+        let title = req.body.title;
+        let text = req.body.text;
+        const note = new noteObj(title, text) 
+        appendNote(PATH, note);
+        res.status(200).json('Success!')
     } catch (err) {
         console.log(err)
         return res.status(500).json(err)
@@ -33,9 +39,14 @@ router.post('/', async (req, res) => {
 })
 
 // update a note
-router.post('/*', async (req, res) => {
+router.post('/:i', async (req, res) => {
     try {
-        //fs writeToFile
+        let index = req.params.i
+        let title = req.body.title;
+        let text = req.body.text;
+        const note = new noteObj(title, text) 
+        updateNote(PATH,index, note);
+        res.status(200).json('Success!')
     } catch (err) {
         console.log(err)
         return res.status(500).json(err)
@@ -43,9 +54,12 @@ router.post('/*', async (req, res) => {
 })
 
 // delete a note
-router.delete('/*', async (req, res) => {
+router.delete('/:i', async (req, res) => {
     try {
         //fs delete file
+        let index = req.params.i
+        deleteNote(PATH, index);
+        res.status(200).json('Success!')
     } catch (err) {
         console.log(err)
         return res.status(500).json(err)
