@@ -1,23 +1,25 @@
 const fs = require('fs');
 
 const readNote = async (path, i) => {
-    const file = await fs.readFile(path, 'utf8', (err, data) => {
+    const data = fs.readFileSync(path, 'utf8', (err) => {
         if (err) throw err
-
-        const note = JSON.parse(data[i]);
-
-        return note
+        return data
     });
+
+    const file = JSON.parse(data);
+    note = file[i]
+
+    return note
 };
 
 const readAllNotes = async (path) => {
-    return fs.readFile(path, 'utf8', (err) => {
+    const data = fs.readFileSync(path, 'utf8', (err) => {
         if (err) throw err
-    
-        const file = JSON.parse(data);
+    });
 
-        return file
-    })
+    const file = JSON.parse(data);
+
+    return file
 };
 
 const appendNote = async (path, input) => {
@@ -52,32 +54,44 @@ const deleteNote = async (path, i) => {
 
 };
 
-const updateNote = async (path, i, input) => {
+const updateNote = async (path, index, input) => {
 
     fs.readFile(path, 'utf8', (err, data) => {
         if (err) throw err
 
         file = JSON.parse(data)
-        file.splice(i, 0, input)
+        file.splice(index, 1, input)
         file = JSON.stringify(file);
 
-        fs.writeFile(path, data, (err) => {
+        fs.writeFile(path, file, (err) => {
             if (err) throw err;
-            console.log('Updated note!')
+            return console.log('Updated note!')
         })
     })
 };
+
+
+//testFunc = async () => {
+    //path = "../db/db.json";
+
+    //const myNote = await readNote(path, 1)
+
+    //console.log(myNote)
+//}
+
+//testFunc()
 
 //path = "../db/db.json";
 
 //data =
 //{
-    //"title": "Test Title",
-    //"text": "Test text"
+//"title": "To do",
+//"text": "Yo mama"
 //};
 
+//index = 3
 
 
-//appendNote(path, data);
+//deleteNote(path, index);
 
 module.exports = { readNote, readAllNotes, appendNote, deleteNote, updateNote }

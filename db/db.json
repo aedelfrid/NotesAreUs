@@ -1,5 +1,9 @@
 [
     {
+        "title": "Todo",
+        "text": "Finish assignment"
+    },
+    {
         "title": "Test Title",
         "text": "Test text"
     }
