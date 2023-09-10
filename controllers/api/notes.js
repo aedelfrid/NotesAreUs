@@ -3,7 +3,7 @@ const { readNote, readAllNotes, appendNote, deleteNote, updateNote } = require('
 const noteObj = require('../../db/models/note')
 const PATH = 'db/db.json'
 // grab all notes
-router.get('/', async (req, res) => {
+router.get('/notes', async (req, res) => {
     try {
         const notes = await readAllNotes(PATH);
         res.json(notes)
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 // grab a specific note
-router.get('/:i', async (req, res) => {
+router.get('/notes/:i', async (req, res) => {
     try {
         const note = await readNote(PATH, req.params.i);
         res.json(note)
@@ -25,7 +25,7 @@ router.get('/:i', async (req, res) => {
 })
 
 // writes a new note
-router.post('/', async (req, res) => {
+router.post('/notes', async (req, res) => {
     try {
         let title = req.body.title;
         let text = req.body.text;
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 })
 
 // update a note
-router.post('/:i', async (req, res) => {
+router.post('/notes/:i', async (req, res) => {
     try {
         let index = req.params.i
         let title = req.body.title;
@@ -54,7 +54,7 @@ router.post('/:i', async (req, res) => {
 })
 
 // delete a note
-router.delete('/:i', async (req, res) => {
+router.delete('/notes/:i', async (req, res) => {
     try {
         //fs delete file
         let index = req.params.i
